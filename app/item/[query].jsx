@@ -19,6 +19,7 @@ import WeaponComments from "@/components/WeaponComments";
 import WriteComments from "@/components/WriteComments";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import ViewHistory from "@/components/ViewHistory";
+import RatingDistribution from "@/components/RatingDistribution";
 
 import { 
   addItemsToCart, 
@@ -29,6 +30,8 @@ import {
 } from "@/lib/appwrite";
 import useAppWrite from "@/lib/useAppWrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
+
+
 
 const Item = () => {
   const { query } = useLocalSearchParams();
@@ -182,7 +185,9 @@ const Item = () => {
             onEditComplete={handleEditComplete}
             onCancelEdit={handleCancelEdit}
           />
-
+          <View className="mb-5">  
+            <RatingDistribution weaponId={query}/>
+          </View>
           <WeaponComments 
             weaponId={query} 
             isReviewedToggle={isReviewedToggle}
