@@ -5,7 +5,7 @@ import { router } from "expo-router";
 import { addItemsToCart, modifyViews, saveViewHistory } from "@/lib/appwrite";
 
 const WeaponCard = ({
-  item: { $id, weapon_name, photo_url, price },
+  item: { $id, weapon_name, photo_url, price, weapon_type },
   isSubmitting,
   setIsSubmitting,
 }) => {
@@ -46,17 +46,21 @@ const WeaponCard = ({
           />
         </View>
 
-        <View className="flex-1 flex-col">
+        <View className="flex-1 flex-col gap-2">
           <Text
             className=" text-lg font-psemibold text-gray-500 mb-1"
             numberOfLines={2}
           >
             {weapon_name}
           </Text>
-
-          <Text className="text-lg font-psemibold text-green-600">
-            A$ {price}
-          </Text>
+          <View className="flex-1 flex-col justify-end gap-2">
+            <Text className="text-sm font-psemibold text-gray-300">
+              {weapon_type}
+            </Text>
+            <Text className="text-sm font-psemibold text-gray-700">
+              A$ <Text className="text-lg">{price} </Text>
+            </Text>
+          </View>
         </View>
 
         <TouchableOpacity

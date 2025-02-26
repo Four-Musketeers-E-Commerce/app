@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   View,
   Modal,
+  TextInput,
 } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";
@@ -26,6 +27,17 @@ const ShoppingCart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    if (data) {
+      const initialQuantities = data.reduce((acc, item) => {
+        acc[item.weapons.$id] = item.quantity.toString();
+        return acc;
+      }, {});
+      setQuantities(initialQuantities);
+    }
+  }, [data]);
 
   const calTotalPrice = () => {
     const total =
@@ -34,6 +46,9 @@ const ShoppingCart = () => {
       }, 0) || 0;
     setTotalPrice(Number(total.toFixed(2)));
   };
+  useEffect(() => {
+    calTotalPrice();
+  }, [data]);
 
   const modifyItemQuantity = async (weaponId, quantity) => {
     setIsLoading(true);
@@ -64,6 +79,18 @@ const ShoppingCart = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleQuantityChange = (weaponId, value) => {
+    if (/^\d*$/.test(value)) {
+      // Ensure only numbers are typed
+      setQuantities((prev) => ({ ...prev, [weaponId]: value }));
+    }
+  };
+
+  const handleQuantityBlur = (weaponId) => {
+    const newQuantity = parseInt(quantities[weaponId], 10) || 1;
+    modifyItemQuantity(weaponId, newQuantity);
   };
 
   const deleteAllItems = async () => {
@@ -99,10 +126,6 @@ const ShoppingCart = () => {
   useEffect(() => {
     refreshData();
   }, []);
-
-  useEffect(() => {
-    calTotalPrice();
-  }, [data]);
 
   return (
     <View className="bg-primary h-full px-4">
@@ -158,9 +181,24 @@ const ShoppingCart = () => {
                       </Text>
                     </TouchableOpacity>
 
-                    <Text className="text-lg text-black-100 font-pregular">
-                      {item.quantity}
-                    </Text>
+                    <TextInput
+                      keyboardType="numeric"
+                      value={quantities[item.weapons.$id]}
+                      onChangeText={(text) =>
+                        handleQuantityChange(item.weapons.$id, text)
+                      }
+                      onBlur={() => handleQuantityBlur(item.weapons.$id)}
+                      style={{
+                        width: 25,
+                        height: 25,
+                        textAlign: "center",
+                        fontSize: 13,
+                        backgroundColor: "white",
+                        color: "black",
+                        borderRadius: 5,
+                        padding: 5,
+                      }}
+                    />
 
                     <TouchableOpacity
                       className="w-8 h-8 justify-center items-center"

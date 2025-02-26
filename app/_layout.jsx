@@ -43,6 +43,10 @@ const RootLayout = () => {
           name="order/[order-history]"
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="category/[category]"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </GlobalProvider>
   );

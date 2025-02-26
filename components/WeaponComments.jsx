@@ -179,7 +179,7 @@ const WeaponComments = ({ weaponId, isReviewedToggle, onEditStart }) => {
 
           {item.rating !== null && <StarRatingShowing rating={item.rating} />}
 
-          <Text className="text-lg text-gray-50 font-pregular">
+          <Text className="text-lg text-gray-700 font-pregular my-3">
             {item.comment}
           </Text>
 
@@ -259,7 +259,7 @@ const WeaponComments = ({ weaponId, isReviewedToggle, onEditStart }) => {
 
   return (
     <View className="w-full px-4">
-      <Text className="w-full text-start text-xl text-gray-300 font-psemibold mb-2">
+      <Text className="w-full text-start text-xl text-gray-500 font-psemibold mb-2">
         Comments
       </Text>
 
@@ -267,7 +267,7 @@ const WeaponComments = ({ weaponId, isReviewedToggle, onEditStart }) => {
         localComments.map(renderCommentBox)
       ) : (
         <View className="w-full justify-center items-center">
-          <Text className="text-xl text-gray-100 font-pbold">
+          <Text className="text-xl text-gray-300 font-psemibold">
             No Comments Yet
           </Text>
         </View>

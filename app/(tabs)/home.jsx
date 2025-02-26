@@ -59,11 +59,14 @@ const Home = () => {
             </View>
             <SearchBar />
 
-            <View className="w-full flex-1 pt-4 pb-8">
-              <Text className="text-xl text-gray-500 font-pregular">
+            <View className="w-full">
+              <Text className="text-xl text-gray-500 font-pregular mt-2">
                 Popular Books
               </Text>
-              <Trending items={trendingItems ?? []} />
+
+              <View className=" h-auto flex-1 justify-center items-center h-[280px]">
+                <Trending items={trendingItems ?? []} />
+              </View>
             </View>
 
             <Text className="text-xl text-gray-500 font-pregular">

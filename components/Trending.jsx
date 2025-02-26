@@ -5,31 +5,48 @@ import * as Animatable from "react-native-animatable";
 
 const zoomIn = {
   0: { scale: 0.9 },
-  1: { scale: 1.1 },
+  1: { scale: 1.05 },
 };
 
 const zoomOut = {
-  0: { scale: 1.1 },
+  0: { scale: 1.05 },
   1: { scale: 0.9 },
 };
 
 const TrendingItem = ({ activeItem, item }) => {
+  const handleViewAgain = async (weaponId) => {
+    try {
+      router.push(`item/${weaponId}`);
+      await saveViewHistory(weaponId, 1);
+    } catch (error) {
+      Alert.alert("Error", "There was an error saving your view history");
+    }
+  };
   return (
     <Animatable.View
-      className="mr-5"
+      className="w-[150px] h-[250px] rounded-xl items-center  bg-primary-100 pb-12 px-4 gap-4"
       animation={activeItem === item.$id ? zoomIn : zoomOut}
       duration={500}
     >
       <TouchableOpacity
-        className="w-[150px] h-[150px] rounded-xl justify-center items-center"
+        className="w-[150px] h-[250px] rounded-xl items-center  bg-primary-100 pb-12 px-4 gap-1 "
         activeOpacity={0.7}
-        onPress={() => router.push(`item/${item.weapons.$id}`)}
+        onPress={() => handleViewAgain(item.weapons.$id)}
       >
         <Image
           source={{ uri: item.weapons.photo_url }}
-          className="w-[90%] h-[90%] rounded-xl border border-gray-300"
+          className=" w-[90%] h-[90%] rounded-xl "
           resizeMode="contain"
         />
+        <Text
+          className="absolute bottom-0 text-md text-gray-500 font-psemibold pb-8 text-center item-center"
+          numberOfLines={2}
+        >
+          {item.weapons.weapon_name}
+        </Text>
+        <Text className="absolute bottom-0 text-sm text-gray-700 font-psemibold pb-2">
+          A$ {item.weapons.price}
+        </Text>
       </TouchableOpacity>
     </Animatable.View>
   );

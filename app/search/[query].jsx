@@ -33,9 +33,9 @@ const Search = () => {
     <SafeAreaView className="bg-primary h-full px-4">
       <LoadingIndicator isLoading={isLoading} />
 
-      <View className="flex-row px-4 items-center justify-between">
+      <View className="flex-row px-4 items-center justify-between border-b border-gray-300 pb-10">
         <BackButton />
-        <View className="flex-1 items-center">
+        <View className="absolute left-1/2 -translate-x-1/2 flex-1 items-center ">
           <Text className="font-pmedium text-gray text-xl">Search for</Text>
           <Text className="text-2xl font-psemibold text-secondary opacity-100 mt-2">
             {query}

@@ -57,7 +57,7 @@ const SearchHistory = ({}) => {
 
   return (
     <View className="p-4">
-      <Text className="text-gray text-xl font-semibold mb-2">
+      <Text className="text-gray text-xl font-semibold mb-2 border-b border-gray-300 pb-2">
         Recent Searches
       </Text>
 

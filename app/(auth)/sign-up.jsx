@@ -61,6 +61,7 @@ const SignUp = () => {
             value={form.password}
             handleTextChange={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
+            onSubmitEditing={submit}
           />
           <CustomButton
             title="Sign Up"

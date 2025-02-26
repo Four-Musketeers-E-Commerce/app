@@ -26,23 +26,30 @@ const ViewedItems = ({ activeItem, item }) => {
   };
 
   return (
-    <Animatable.View className="mr-2" duration={500}>
+    <Animatable.View className="mr-3" duration={500}>
       <TouchableOpacity
-        className="w-[150px] h-[250px] rounded-xl justify-center items-center  bg-primary-100 pb-4 "
+        className="w-[150px] h-[250px] rounded-xl bg-primary-100"
         activeOpacity={0.7}
         onPress={() => handleViewAgain(item.weapons.$id)}
       >
-        <Image
-          source={{ uri: item.weapons.photo_url }}
-          className="absolute top-0 w-[90%] h-[90%] rounded-xl "
-          resizeMode="contain"
-        />
-        <Text className="absolute bottom-0 text-md text-gray-700 font-pregular pb-8">
-          {item.weapons.weapon_name}
-        </Text>
-        <Text className="absolute bottom-0 text-sm text-green-400 font-pregular pb-2">
-          A$ {item.weapons.price}
-        </Text>
+        <View className="flex items-center justify-start h-[65%] pt-2">
+          <Image
+            source={{ uri: item.weapons.photo_url }}
+            className="w-full h-full rounded-xl"
+            resizeMode="contain"
+          />
+        </View>
+        <View className="flex-1 flex-col justify-end items-center h-[35%] px-2 gap-2">
+          <Text
+            className="text-md text-gray-700 font-pregular text-center justify-start"
+            numberOfLines={2}
+          >
+            {item.weapons.weapon_name}
+          </Text>
+          <Text className="text-center text-md text-gray-700 font-psemibold pb-2">
+            A$ {item.weapons.price}
+          </Text>
+        </View>
       </TouchableOpacity>
     </Animatable.View>
   );

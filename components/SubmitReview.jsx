@@ -84,13 +84,13 @@ const SubmitReview = ({
   return (
     <View
       ref={reviewRef}
-      className={`w-full px-4 flex-col gap-4 items-center ${containerStyles}`}
+      className={`w-full px-4 flex-col gap-4 items-center bg-primary-100 shadow shadow-gray-300 p-3 ${containerStyles}`}
     >
-      <Text className="text-xl text-gray-300 font-psemibold w-full text-start">
+      <Text className="text-xl text-gray-500 font-psemibold w-full text-start">
         {isEditing ? "Edit your review" : "How was this product?"}
       </Text>
       <WeaponRatingInput rating={rating} setRating={setRating} />
-      <Text className="text-xl text-gray-300 font-psemibold w-full text-start">
+      <Text className="text-xl text-gray-500 font-psemibold w-full text-start">
         {isEditing ? "Edit your comment" : "Leave a comment"}
       </Text>
 

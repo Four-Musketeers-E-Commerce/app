@@ -27,6 +27,7 @@ import LoadingIndicator from "@/components/LoadingIndicator";
 import ViewHistory from "@/components/ViewHistory";
 import BackButton from "@/components/BackButton";
 import SubmitReview from "@/components/SubmitReview";
+import RatingDistribution from "@/components/RatingDistribution";
 
 const Item = () => {
   const { query } = useLocalSearchParams();
@@ -126,13 +127,13 @@ const Item = () => {
         <BackButton />
         <View className="flex-1" />
         <TouchableOpacity
-          className="w-8 h-8 justify-center items-center bg-gray-50/50 rounded-lg"
+          className="w-8 h-8 justify-center items-center bg-gray-300 rounded-lg"
           onPress={onShare}
         >
           <FontAwesome name="share" size={20} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
-          className="w-8 h-8 justify-center items-center bg-gray-50/50 rounded-lg"
+          className="w-8 h-8 justify-center items-center bg-gray-300 rounded-lg"
           onPress={() => {
             router.push("/(tabs)/shopping-cart");
           }}
@@ -160,19 +161,20 @@ const Item = () => {
               {data?.description}
             </Text>
           </View>
-
+          <View className="mb-5">
+            <RatingDistribution weaponId={query} />
+          </View>
+          <WeaponComments
+            weaponId={query}
+            isReviewedToggle={isReviewedToggle}
+            onEditStart={handleEditStart}
+          />
           <SubmitReview
             weaponId={query}
             containerStyles="my-7"
             editData={editReviewData}
             onEditComplete={handleEditComplete}
             onCancelEdit={handleCancelEdit}
-          />
-
-          <WeaponComments
-            weaponId={query}
-            isReviewedToggle={isReviewedToggle}
-            onEditStart={handleEditStart}
           />
 
           <ViewHistory />
